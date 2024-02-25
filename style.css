@@ -1,0 +1,28 @@
+.social-button {
+    height: 2em;
+    width: 2em;
+}
+
+
+body {
+    height: 100vh;
+    margin: 0;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:'Courier';
+    height: 100%;
+    font-size: 1em;
+}
+
+#portrait {
+    width: 150px;
+    border-radius: 100%;
+}
+
+main > * {
+    max-width: 19em;
+    text-align: center;
+}
