@@ -21,7 +21,6 @@ const resend = new Resend(process.env['RESEND_API_KEY'])
 interface ContactRequest {
   email: string;
   message: string;
-  name?: string;
   subject?: string;
 };
 
@@ -39,7 +38,7 @@ app.get('/contact', async (req, res)=>{
 });
 
 app.post("/contact", async (req, res) => {
-  const { email, message, name, subject } = req.body as ContactRequest;
+  const { email, message, subject } = req.body as ContactRequest;
   if (!validateEmail(email)) {
     res.status(400).send("Invalid email");
     return;
@@ -50,7 +49,7 @@ app.post("/contact", async (req, res) => {
   }
   const info = await resend.emails.send({
     from: fromMail,
-    reply_to: `${name?`"${name}"`:''} <${email}>`,
+    reply_to: email,
     to: toMail,
     subject: subject || "Contact form message",
     text: message
