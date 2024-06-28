@@ -1,9 +1,8 @@
 import 'express-async-errors';
 import express, {NextFunction, Request, Response} from "express";
 import bodyParser from "body-parser";
-import nodemailer from 'nodemailer';
 import { validate as validateEmail } from 'email-validator';
-
+import { Resend } from 'resend';
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -12,19 +11,12 @@ app.use(bodyParser.json())
 const port = process.env['PORT'] || 3000;
 
 const toMail = process.env['TO_EMAIL'];
-
-const smtp = {
-  service: process.env['SMTP_SERVICE']!,
-  host: process.env['SMTP_HOST']!,
-  port: parseInt(process.env['SMTP_PORT']!),
-  secure: !!(process.env['SMTP_SECURE'] && process.env['SMTP_SECURE'] != 'false'),
-  auth: {
-    user: process.env['SMTP_AUTH_USER']!,
-    pass: process.env['SMTP_AUTH_PASS']!,
-  }
+const fromMail = process.env['FROM_EMAIL'];
+if (!toMail||!fromMail){
+  throw new Error("Incomplete mail config");
 }
 
-const transporter = nodemailer.createTransport(smtp);
+const resend = new Resend(process.env['RESEND_API_KEY'])
 
 interface ContactRequest {
   email: string;
@@ -56,15 +48,16 @@ app.post("/contact", async (req, res) => {
     res.status(400).send("No message");
     return;
   }
-  const info = await transporter.sendMail({
-    from: `<${smtp.auth.user}>`,
-    replyTo: `${name?`"${name}"`:''} <${email}>`,
+  const info = await resend.emails.send({
+    from: fromMail,
+    reply_to: `${name?`"${name}"`:''} <${email}>`,
     to: toMail,
     subject: subject || "Contact form message",
     text: message
   });
 
-  if (info.rejected.length) {
+  if (info.error) {
+    console.error(info.error)
     res.status(500).send("Failed to send message");
     return;
   }
@@ -72,7 +65,7 @@ app.post("/contact", async (req, res) => {
 });
 
 app.use(async (err:Error, req:Request, res:Response, next:NextFunction) => {
-  console.error(err.stack)
+  console.error(err)
   res.status(500).send('Internal server error');
   return;
 });
