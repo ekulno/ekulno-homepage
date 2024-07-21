@@ -1,0 +1,11 @@
+version: '2'
+services:
+  homepage:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      RESEND_API_KEY: test
+      RESEND_TO_EMAIL: contact@test.com
+      RESEND_FROM_EMAIL: mailbot@test.com

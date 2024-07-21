@@ -1,0 +1,9 @@
+.portrait {
+  width: 150px;
+  border-radius: 100%;
+  filter: brightness(130%) grayscale(100%);
+}
+
+.link {
+  padding: 0.5em;
+}

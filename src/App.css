@@ -1,0 +1,39 @@
+@media (prefers-color-scheme: dark) {
+  .root {
+    background-color: #121212;
+    color: #ededed;
+  }
+  a {
+    color: #52d5ef;
+    /* text-decoration: none; */
+  }
+  a:visited {
+    color: #b5a3c8;
+  }
+}
+
+a {
+  /* text-decoration: none; */
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.shell {
+  display: 'flex';
+  flex-direction: column;
+  text-align: center;
+  font-family: 'Courier';
+  max-width: 19em;
+}
+
+.darkMode .darkModeButton {
+  filter: invert();
+}
+
+.darkModeButton {
+  width: 20px;
+}

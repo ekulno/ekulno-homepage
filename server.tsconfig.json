@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "lib": ["dom"],
+      "allowSyntheticDefaultImports": true,
+      "strict": true,
+      "module": "esnext",
+      "moduleResolution": "node",
+      "isolatedModules": true,
+      "jsx": "react",
+      "noEmit": false,
+      "sourceMap": true
+    },
+    "include": ["server"]
+  }
