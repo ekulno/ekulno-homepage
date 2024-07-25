@@ -20,7 +20,7 @@ EirikLd satisfies Person;
 export const HomepageLd = {
   '@type': 'ProfilePage',
   url: 'https://ekul.no',
-  about: EirikLd,
+  mainEntity: EirikLd,
   name: "Eirik's homepage"
 } as const;
 
