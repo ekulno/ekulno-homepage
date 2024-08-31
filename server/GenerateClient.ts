@@ -17,8 +17,8 @@ export default <P>(
     }
     const clientString = data
     .replace(
-      '<div id="root"></div>', 
-      `<div id="root">${app}</div>`,
+      '<div id="root" style="height: 100vh"></div>', 
+      `<div id="root" style="height: 100vh">${app}</div>`,
     )
     .replace(
       '<head>',
