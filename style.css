@@ -1,0 +1,38 @@
+body {
+    font-family: "Courier New", Courier, "Lucida Console", Monaco, monospace;
+    display: flex;
+    justify-content: center;
+}
+
+
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 19em;
+}
+
+p {
+    text-align: center;
+}
+
+img {
+    width: 150px;
+    border-radius: 100%;
+    filter: brightness(130%) grayscale(100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #ededed;
+    }
+
+    a {
+        color: #52d5ef;
+    }
+
+    a:visited {
+        color: #b5a3c8;
+    }
+}
