@@ -1,5 +1,5 @@
 {
-  "@type": "Person",
+  "@type": "https://schema.org/Person",
   "@id": "https://ekul.no/eirik",
   "name": "Eirik Kultorp",
   "givenName": "Eirik",
